@@ -1,0 +1,220 @@
+/* .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 800px;
+    max-width: 100%;
+    min-height: 400px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .sign-in-container {
+    width: 50%;
+    left: 0;
+    z-index: 2;
+  }
+  
+  .sign-up-container {
+    width: 50%;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  .popup-container.sign-up-mode .sign-in-container {
+    transform: translateX(100%);
+  }
+  
+  .popup-container.sign-up-mode .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
+  
+  .overlay-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+  }
+  
+  .overlay {
+    background: linear-gradient(to right, #1a8efd, #143aa3);
+    color: white;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  .popup-container.sign-up-mode .overlay-container {
+    transform: translateX(-100%);
+  }
+  
+  .overlay-panel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  .overlay-left {
+    transform: translateX(-20%);
+  }
+  
+  .overlay-right {
+    right: 186px;
+    transform: translateX(0);
+  }
+  
+  .popup-container.sign-up-mode .overlay-left {
+    transform: translateX(0);
+  }
+  
+  .popup-container.sign-up-mode .overlay-right {
+    transform: translateX(20%);
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  p {
+    font-size: 14px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+  
+  a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .submit-btn, .ghost-btn {
+    background-color: #1A8EFD;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #1A8EFD;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover, .ghost-btn:hover {
+    background-color: white;
+    color: #1A8EFD;
+  }
+  
+  .ghost-btn {
+    background: transparent;
+    border-color: white;
+  }
+  
+   */
+
+   /* Make background image cover entire screen */
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../../Assets/pxfuel.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Glassmorphism effect for the card */
+.glass-card {
+  width: 400px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+/* Additional styles */
+.form-label {
+  color: #ffffff; /* White label for better contrast */
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Make the design responsive */
+@media (max-width: 768px) {
+  .glass-card {
+      width: 90%; /* Adjust width for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .glass-card {
+      width: 100%; /* Full width for very small devices */
+      padding: 1.5rem;
+  }
+}

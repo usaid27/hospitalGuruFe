@@ -1,0 +1,155 @@
+.modal-Appointmentoverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+    z-index: 7;
+  }
+  
+  .modal-Appointmentcontainer {
+    background: #fff;
+    border-radius: 15px;
+    padding: 40px;
+    width: 65%;
+    /* max-width: 600px; */
+    position: relative;
+    animation: slideIn 0.5s ease-in-out;
+  }
+  
+  .close-Appointmenticon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .appointment-form-section {
+    text-align: center;
+    color: #333;
+  }
+  
+  .form-Appointmenttitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #9d2553;
+    margin-bottom: 3%;
+  }
+  
+  .form-Appointmentcontent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .AppoinmentInputForm{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    /* border: 1px solid black; */
+  }
+  
+  label {
+    font-size: 1rem;
+    width: 20%;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  input,
+  select {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .AppointmentInputcontainer{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
+  /* .AppointmentInput{
+    margin-left: 3%;
+  } */
+  input:focus,
+  select:focus {
+    border-color: #9d2553;
+  }
+  
+  .Appointment-btn {
+    background-color: #9d2553;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Appointment-btn:hover {
+    background-color: #8b1f4c;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0 !important;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 95%;
+      padding: 20px;
+    }
+  
+    .form-title {
+      font-size: 1.3rem;
+    }
+  
+    .text-appointment-btn {
+      font-size: 1rem;
+    }
+  }
+  

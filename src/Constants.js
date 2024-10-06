@@ -1,0 +1,1 @@
+export const baseUrl = "https://cs-chcff8hfbahvdyd9.southindia-01.azurewebsites.net"

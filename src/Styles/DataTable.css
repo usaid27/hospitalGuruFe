@@ -1,0 +1,19 @@
+.table-custom th {
+  background-color: #f8f9fa; /* Light grey background */
+  color: #495057; /* Dark grey text */
+}
+
+.table-custom td, .table-custom th {
+  vertical-align: middle; /* Center align text vertically */
+}
+
+.table-custom tr:nth-of-type(odd) {
+  background-color: #f2f2f2; /* Alternating row color */
+}
+
+.custom-search-width {
+  width: 200px; /* Adjust as needed */
+}
+.form-control-sm{
+  height: 100%;
+}

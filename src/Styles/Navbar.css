@@ -1,0 +1,191 @@
+/* Navbar Section */
+.navbar-section {
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 68px;
+    background-color: #1A8EFD; /* Blue background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Logo */
+.navbar-logo {
+    margin-top: 10px;
+    width: 56px;
+    height: auto;
+}
+
+/* Navbar Title */
+.navbar-title a {
+    color: white; /* White font color */
+    letter-spacing: .6px;
+    text-decoration: none;
+}
+
+.navbar-title {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar Items */
+.navbar-items {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 0;
+}
+
+.navbar-items > li {
+    list-style-type: none;
+}
+
+/* Navbar Links */
+.navbar-links {
+    text-decoration: none;
+    color: white; /* White font color */
+    font-size: 18px;
+    letter-spacing: .6px;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease, text-decoration 0.3s ease;
+}
+
+.navbar-links::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white; /* White underline */
+    transition: width 0.3s ease;
+}
+
+.navbar-links:hover {
+    color: #f0f0f0; /* Slightly lighter color on hover */
+    transform: scale(1.1);
+}
+
+.navbar-links:hover::after {
+    width: 100%; /* Underline appears on hover */
+}
+
+/* Navbar Button */
+.navbar-btn {
+    padding: 10px 18px;
+    color: #1A8EFD; /* Blue font color */
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background-color: white; /* White background */
+    font-size: 14px;
+    font-family: 'Rubik', sans-serif;
+    letter-spacing: .6px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.navbar-btn:hover {
+    color: white; /* White font color on hover */
+    background-color: #1A8EFD; /* Blue background on hover */
+    border: 1px solid white;
+}
+
+/* Hamburger Icon */
+.mobile-nav {
+    display: none; /* Hide hamburger icon by default */
+}
+
+.hamb-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: white; /* White icon color */
+}
+
+.hamb-icon:hover {
+    color: #f0f0f0;
+}
+
+/* Mobile Navbar */
+.mobile-navbar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    background-color: #1A8EFD; /* Blue background */
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.5s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-navbar-close {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+}
+
+.mobile-navbar-close .hamb-icon:hover {
+    color: rgb(255, 22, 22);
+}
+
+/* Open Mobile Navbar */
+.open-nav {
+    left: 0;
+}
+
+/* Mobile Navbar Links */
+.mobile-navbar-links {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    gap: 20px;
+    text-align: center;
+}
+
+.mobile-navbar-links li a {
+    text-decoration: none;
+    color: white; /* White font color */
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    letter-spacing: .8px;
+    position: relative;
+    transition: color 0.3s ease-in-out, text-decoration 0.3s ease;
+}
+
+.mobile-navbar-links li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white; /* White underline */
+    transition: width 0.3s ease;
+}
+
+.mobile-navbar-links li a:hover {
+    color: #f0f0f0;
+}
+
+.mobile-navbar-links li a:hover::after {
+    width: 100%;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 900px) {
+    .navbar-btn, .navbar-items {
+        display: none;
+    }
+    .mobile-nav {
+        display: block; /* Show hamburger icon on screens <= 900px */
+    }
+}

@@ -1,0 +1,126 @@
+.medical-procedures-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #9d2553;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+  font-family: "Arial", sans-serif;
+  animation: titleAnimation 2s ease-in-out;
+}
+
+/* Add underline with animation */
+.page-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 5px;
+  background: #9d2553;
+  margin: 0.5rem auto;
+  animation: underlineAnimation 2s ease-in-out;
+}
+
+/* Grid layout for procedures */
+.procedures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Card style */
+.procedure-card {
+  /* background-color: #fff; */
+  background-color: #eef5f9;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.procedure-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Content within card */
+.card-content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.ProcedureImg {
+  width: 45%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cbd5e1;
+  border-radius: 50%;
+ margin: 0 10px 0 0;
+  /* border: 1px solid black; */
+}
+.ProcedureInfo{
+  width: 100%;
+  /* border: 1px solid black; */
+}
+.procedure-name {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.procedure-card:hover .procedure-name {
+  color: #9d2553;
+}
+
+.procedure-description {
+  font-size: .9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.procedure-duration {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Animations */
+@keyframes titleAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes underlineAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .procedure-card {
+    margin-bottom: 20px;
+  }
+}
