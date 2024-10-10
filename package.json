@@ -28,7 +28,10 @@
     "react-leaflet": "^4.2.1",
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "^5.0.1",
+<<<<<<< HEAD
+=======
     "react-select": "^5.8.1",
+>>>>>>> 425d2d540de08fbea24412cbf692a0079918c77d
     "react-table": "^7.8.0",
     "react-toastify": "^9.1.3",
     "web-vitals": "^2.1.4"
