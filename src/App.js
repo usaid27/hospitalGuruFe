@@ -15,14 +15,9 @@ import Dashboard from './Pages/Admin/Dashboard';
 import MedicalProcedure from './Pages/User/MedicalProcedure';
 import DoctorsConfig from './Pages/Admin/Doctor/Doctors';
 import HospitalsConfig from './Pages/Admin/Hospital/Hospitals';
-import Procedures from './Pages/Admin/Procedure/Procedures';
+import ProceduresConfig from './Pages/Admin/Procedure/ProceduresConfig';
 import AddDoctor from './Pages/Admin/Doctor/AddDoctor';
-import AddHospitals from './Pages/Admin/Hospital/AddHospitals';
-import AddProcedure from './Pages/Admin/Procedure/AddProcedure';
 import EditDoctorPage from './Pages/Admin/Doctor/EditDoctorPage';
-import EditHospitalPage from './Pages/Admin/Hospital/EditHospitalPage';
-import EditProcedurePage from './Pages/Admin/Procedure/EditProcedurePage';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from './Components/PrivateRoute';
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer
@@ -45,13 +40,9 @@ function App() {
             <Route path="dashboard" element={<PrivateRoute element={Dashboard} />} />
             <Route path="doctors" element={<PrivateRoute element={DoctorsConfig} />} />
             <Route path="doctors/add-doctor" element={<PrivateRoute element={AddDoctor} />} />
-            <Route path="hospitals/add-hospital" element={<PrivateRoute element={AddHospitals} />} />
-            <Route path="procedures/add-procedure" element={<PrivateRoute element={AddProcedure} />} />
             <Route path="doctors/edit-doctor/:id" element={<EditDoctorPage />} />
-            <Route path="hospitals/edit-hospital/:id" element={<EditHospitalPage />} />
-            <Route path="procedures/edit-procedure/:id" element={<EditProcedurePage />} />
             <Route path="hospitals" element={<PrivateRoute element={HospitalsConfig} />} />
-            <Route path="procedures" element={<PrivateRoute element={Procedures} />} />
+            <Route path="procedures" element={<PrivateRoute element={ProceduresConfig} />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

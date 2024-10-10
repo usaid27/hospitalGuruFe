@@ -36,7 +36,6 @@ export const logout = async () => {
     }
 };
 
-
 // Application Data endpoints (AppController)
 const APP_API_URL = `${API_BASE_URL}app/`;
 

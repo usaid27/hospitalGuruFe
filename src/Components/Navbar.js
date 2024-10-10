@@ -76,7 +76,7 @@ function Navbar() {
             <Link onClick={openNav} to="/hospitals">Hospitals</Link>
           </li>
           <li>
-            <Link onClick={openNav} to="/procedures">Procedures</Link>
+            <Link onClick={openNav} to="/MedicalProcedure">Procedures</Link>
           </li>
           <li>
             <Link onClick={openNav} to="/reviews">Reviews</Link>
