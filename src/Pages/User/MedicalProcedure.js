@@ -5,9 +5,11 @@ import Footer from "../../Components/Footer";
 import MedicalProcedureModal from "./MedicalProcedureModal";
 import axios from "axios";
 import { baseUrl } from "../../Constants";
+import Loading from "../Loading";
 
 const MedicalProcedure = () => {
   const [medicalModal, setmedicalModal] = useState(false);
+  const [loading, setloading] = useState(false);
   const [proceduredata, setproceduredata] = useState({});
   const data = [
     {
@@ -87,11 +89,14 @@ const MedicalProcedure = () => {
   }, []);
 
   const getAllProcedures = async () => {
+    setloading(true);
     try {
       const response = await axios.get(`${baseUrl}/api/App/all-procedures`);
       console.log(response);
+      setloading(false);
     } catch (error) {
       console.log(error);
+      setloading(false);
     }
   };
 
@@ -108,28 +113,32 @@ const MedicalProcedure = () => {
       <Navbar />
       <div className="medical-procedures-container">
         <h2 className="page-title">Medical Procedures</h2>
-        <div className="procedures-grid">
-          {data.map((item) => (
-            <div
-              key={item.id}
-              className="procedure-card"
-              onClick={() => handelProcedureModal(item)}
-            >
-              <div className="card-content">
-                <div className="ProcedureImg">
-                  <img src={item.img} />
-                </div>
-                <div className="ProcedureInfo">
-                  <h3 className="procedure-name page-title">{item.name}</h3>
-                  <p className="procedure-description">{item.description}</p>
-                  <p className="procedure-duration">
-                    <strong>Duration:</strong> {item.duration}
-                  </p>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="procedures-grid">
+            {data.map((item) => (
+              <div
+                key={item.id}
+                className="procedure-card"
+                onClick={() => handelProcedureModal(item)}
+              >
+                <div className="card-content">
+                  <div className="ProcedureImg">
+                    <img src={item.img} />
+                  </div>
+                  <div className="ProcedureInfo">
+                    <h3 className="procedure-name page-title">{item.name}</h3>
+                    <p className="procedure-description">{item.description}</p>
+                    <p className="procedure-duration">
+                      <strong>Duration:</strong> {item.duration}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
         {medicalModal && (
           <MedicalProcedureModal
             proceduredata={proceduredata}

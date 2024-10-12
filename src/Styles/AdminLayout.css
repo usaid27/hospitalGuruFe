@@ -15,12 +15,12 @@
     font-size: 18px !important; /* Font size */
     font-family: 'Cursive', sans-serif !important; /* Font family */
     font-weight: bold !important; /* Bold text */
-    color: #ffffff; /* Ensure text color matches */
+    color: #ffffff; 
     margin-left: 8px !important; /* Space between logo and text */
 }
 
 .MuiListItem-root {
-    color: #fff;
+    color: #ffffff;
 }
 
 .MuiListItem-root:hover {
@@ -35,3 +35,5 @@
 .css-cveggr-MuiListItemIcon-root{
     min-width: 28px !important;
 }
+
+

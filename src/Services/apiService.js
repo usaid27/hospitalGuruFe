@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { baseUrl } from '../Constants';
 
-const API_BASE_URL = "https://localhost:7231/api/";
+// const API_BASE_URL = "https://localhost:7231/api/";
 
 // Authentication endpoints (AccountController)
-const AUTH_API_URL = `${API_BASE_URL}account/`;
+const AUTH_API_URL = `${baseUrl}/api/account/`;
 
 export const register = async (email, password) => {
     try {
@@ -17,6 +18,9 @@ export const register = async (email, password) => {
 
 export const login = async (userEmail, password, rememberMe =true) => {
     try {
+        // console.log(userEmail)
+        // console.log(password)
+        // console.log(rememberMe)
         const response = await axios.post(`${AUTH_API_URL}login`, { userEmail, password, rememberMe});
         localStorage.setItem('token', response.data.token);
         return response.data;
@@ -37,7 +41,7 @@ export const logout = async () => {
 };
 
 // Application Data endpoints (AppController)
-const APP_API_URL = `${API_BASE_URL}app/`;
+const APP_API_URL = `${baseUrl}/api/app/`;
 
 // Utility function to get the token from localStorage
 const getAuthToken = () => {
@@ -66,6 +70,7 @@ export const getAllDoctors = async () => {
         const response = await axios.get(`${APP_API_URL}all-doctors`, {
             headers: getAuthHeaders(),
         });
+        console.log(response)
         return response.data;
     } catch (error) {
         console.error("Error fetching all doctors", error);

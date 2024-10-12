@@ -1,26 +1,27 @@
 // src/Pages/Admin/Hospital/Hospitals.js
 
-import React, { useEffect, useMemo, useState } from 'react';
-import { FaEye, FaEdit, FaTrash, FaPlus, FaDownload } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { getAllHospitals, deleteHospital } from '../../../Services/apiService';
-import HospitalDetailsDialog from './HospitalDetailsDialog'; // Ensure this component exists
-import hospitalImage from '../../../Assets/hospital-icon.jpg'; // Update the path as needed
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import { CSVLink } from 'react-csv';
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Container, Row, Col, Pagination, InputGroup } from 'react-bootstrap';
-import { useTable, useSortBy } from 'react-table';
-import '../../../Styles/DataTable.css';
+import React, { useEffect, useMemo, useState } from "react";
+import { FaEye, FaEdit, FaTrash, FaPlus, FaDownload } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getAllHospitals, deleteHospital } from "../../../Services/apiService";
+import HospitalDetailsDialog from "./HospitalDetailsDialog"; // Ensure this component exists
+import hospitalImage from "../../../Assets/hospital-icon.jpg"; // Update the path as needed
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { CSVLink } from "react-csv";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Container, Row, Col, Pagination, InputGroup } from "react-bootstrap";
+import { useTable, useSortBy } from "react-table";
+import "../../../Styles/DataTable.css";
+import Loading from "../../Loading";
 
 function GlobalFilter({ globalFilter, setGlobalFilter }) {
   const [value, setValue] = useState(globalFilter);
 
-  const onChange = value => {
+  const onChange = (value) => {
     setGlobalFilter(value || undefined);
   };
 
@@ -29,7 +30,7 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
       size="sm"
       type="text"
       value={value || ""}
-      onChange={e => {
+      onChange={(e) => {
         setValue(e.target.value);
         onChange(e.target.value);
       }}
@@ -45,18 +46,22 @@ function Hospitals() {
   const [showDetails, setShowDetails] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [gotoPage, setGotoPage] = useState('');
-  const [searchText, setSearchText] = useState('');
+  const [gotoPage, setGotoPage] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHospitals = async () => {
+      setloading(true);
       try {
         const data = await getAllHospitals();
         console.log("Fetched Hospitals:", data);
         setHospitals(data);
+        setloading(false);
       } catch (error) {
-        toast.error('Error fetching hospitals.');
+        toast.error("Error fetching hospitals.");
+        setloading(false);
       }
     };
     fetchHospitals();
@@ -64,25 +69,28 @@ function Hospitals() {
 
   const handleDelete = (id) => {
     confirmAlert({
-      title: 'Delete Hospital',
-      message: 'Are you sure you want to delete this hospital? This action cannot be undone.',
+      title: "Delete Hospital",
+      message:
+        "Are you sure you want to delete this hospital? This action cannot be undone.",
       buttons: [
         {
-          label: 'Yes',
+          label: "Yes",
           onClick: async () => {
             try {
               await deleteHospital(id);
-              setHospitals(prevHospitals => prevHospitals.filter(hospital => hospital.id !== id));
-              toast.success('Hospital deleted successfully!');
+              setHospitals((prevHospitals) =>
+                prevHospitals.filter((hospital) => hospital.id !== id)
+              );
+              toast.success("Hospital deleted successfully!");
             } catch (error) {
-              toast.error('Failed to delete hospital.');
+              toast.error("Failed to delete hospital.");
             }
-          }
+          },
         },
         {
-          label: 'No',
-          onClick: () => toast.info('Hospital deletion canceled.')
-        }
+          label: "No",
+          onClick: () => toast.info("Hospital deletion canceled."),
+        },
       ],
       overlayClassName: "confirm-alert-overlay-danger",
     });
@@ -101,77 +109,103 @@ function Hospitals() {
       : hospitalImage;
   };
 
-  const columns = useMemo(() => [
-    {
-      Header: 'ID',
-      accessor: 'id',
-      Cell: ({ value }) => (
-        <div style={{ width: '60px', textAlign: 'center' }}>{value}</div>
-      ),
-      sortType: 'basic',
-      width: 60
-    },
-    {
-      Header: 'Image',
-      accessor: 'imageFile', // Changed to 'imageBase64'
-      Cell: ({ value }) => (
-        <img
-          src={convertByteArrayToImage(value)}
-          alt="Hospital"
-          style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '8px' }}
-        />
-      ),
-      width: 70
-    },
-    {
-      Header: 'Name',
-      accessor: 'name', // Changed to 'name'
-      sortType: 'basic',
-      width: 200
-    },
-    {
-      Header: 'Location',
-      accessor: 'location', // Changed to 'location'
-      sortType: 'basic',
-      width: 200
-    },
-    {
-      Header: 'Phone',
-      accessor: 'phone', // Changed to 'phone'
-      sortType: 'basic',
-      width: 150
-    },
-    {
-      Header: 'Email',
-      accessor: 'email', // Changed to 'email'
-      sortType: 'basic',
-      width: 200
-    },
-    {
-      Header: 'Actions',
-      Cell: ({ row }) => (
-        <div className="action-buttons" style={{ textAlign: 'center' }}>
-          <Button variant="info" size="sm" onClick={() => handleViewHospital(row.original)} style={{ margin: '0 2px' }}>
-            <FaEye />
-          </Button>
-          <Button variant="warning" size="sm" onClick={() => navigate(`/admin/hospitals/edit-hospital/${row.original.id}`)} style={{ margin: '0 2px' }}>
-            <FaEdit />
-          </Button>
-          <Button variant="danger" size="sm" onClick={() => handleDelete(row.original.id)} style={{ margin: '0 2px' }}>
-            <FaTrash />
-          </Button>
-        </div>
-      ),
-      width: 150
-    },
-  ], [navigate]);
+  const columns = useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: "id",
+        Cell: ({ value }) => (
+          <div style={{ width: "60px", textAlign: "center" }}>{value}</div>
+        ),
+        sortType: "basic",
+        width: 60,
+      },
+      {
+        Header: "Image",
+        accessor: "imageFile", // Changed to 'imageBase64'
+        Cell: ({ value }) => (
+          <img
+            src={convertByteArrayToImage(value)}
+            alt="Hospital"
+            style={{
+              width: "50px",
+              height: "50px",
+              objectFit: "cover",
+              borderRadius: "8px",
+            }}
+          />
+        ),
+        width: 70,
+      },
+      {
+        Header: "Name",
+        accessor: "name", // Changed to 'name'
+        sortType: "basic",
+        width: 200,
+      },
+      {
+        Header: "Location",
+        accessor: "location", // Changed to 'location'
+        sortType: "basic",
+        width: 200,
+      },
+      {
+        Header: "Phone",
+        accessor: "phone", // Changed to 'phone'
+        sortType: "basic",
+        width: 150,
+      },
+      {
+        Header: "Email",
+        accessor: "email", // Changed to 'email'
+        sortType: "basic",
+        width: 200,
+      },
+      {
+        Header: "Actions",
+        Cell: ({ row }) => (
+          <div className="action-buttons" style={{ textAlign: "center" }}>
+            <Button
+              variant="info"
+              size="sm"
+              onClick={() => handleViewHospital(row.original)}
+              style={{ margin: "0 2px" }}
+            >
+              <FaEye />
+            </Button>
+            <Button
+              variant="warning"
+              size="sm"
+              onClick={() =>
+                navigate(`/admin/hospitals/edit-hospital/${row.original.id}`)
+              }
+              style={{ margin: "0 2px" }}
+            >
+              <FaEdit />
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={() => handleDelete(row.original.id)}
+              style={{ margin: "0 2px" }}
+            >
+              <FaTrash />
+            </Button>
+          </div>
+        ),
+        width: 150,
+      },
+    ],
+    [navigate]
+  );
 
   const filteredData = useMemo(() => {
-    return hospitals.filter(hospital =>
-      hospital.name?.toLowerCase().includes(searchText.toLowerCase()) ||
-      hospital.location?.toLowerCase().includes(searchText.toLowerCase()) ||
-      hospital.phone?.toLowerCase().includes(searchText.toLowerCase()) ||
-      hospital.email?.toLowerCase().includes(searchText.toLowerCase())
+    return hospitals.filter(
+      (hospital) =>
+        hospital.name?.toLowerCase().includes(searchText.toLowerCase()) ||
+        hospital.location?.toLowerCase().includes(searchText.toLowerCase()) ||
+        hospital.phone?.toLowerCase().includes(searchText.toLowerCase()) ||
+        hospital.email?.toLowerCase().includes(searchText.toLowerCase())
     );
   }, [hospitals, searchText]);
 
@@ -181,13 +215,13 @@ function Hospitals() {
     headerGroups,
     rows,
     prepareRow,
-    state: { sortBy }
+    state: { sortBy },
   } = useTable(
     {
       columns,
       data: filteredData,
       initialState: {
-        sortBy: [{ id: 'id', desc: false }],
+        sortBy: [{ id: "id", desc: false }],
       },
     },
     useSortBy
@@ -195,7 +229,10 @@ function Hospitals() {
 
   const indexOfLastHospital = currentPage * itemsPerPage;
   const indexOfFirstHospital = indexOfLastHospital - itemsPerPage;
-  const currentHospitals = rows.slice(indexOfFirstHospital, indexOfLastHospital);
+  const currentHospitals = rows.slice(
+    indexOfFirstHospital,
+    indexOfLastHospital
+  );
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   const handleGotoPage = () => {
@@ -205,19 +242,25 @@ function Hospitals() {
     } else {
       toast.error(`Please enter a page number between 1 and ${totalPages}`);
     }
-    setGotoPage('');
+    setGotoPage("");
   };
 
   return (
     <Container fluid>
-
       <Row className="mb-3 mt-3">
         <Col xs={12} md={3} className="mb-2 mb-md-0">
-          <Button variant="primary" onClick={() => navigate('/admin/hospitals/add-hospital')}>
+          <Button
+            variant="primary"
+            onClick={() => navigate("/admin/hospitals/add-hospital")}
+          >
             <FaPlus /> Add Hospital
           </Button>
         </Col>
-        <Col xs={12} md={9} className="d-flex flex-column flex-md-row justify-content-md-end align-items-center">
+        <Col
+          xs={12}
+          md={9}
+          className="d-flex flex-column flex-md-row justify-content-md-end align-items-center"
+        >
           <div className="d-flex flex-row mb-2 mb-md-0">
             <CSVLink
               data={filteredData}
@@ -226,7 +269,7 @@ function Hospitals() {
                 { label: "Name", key: "name" },
                 { label: "Location", key: "location" },
                 { label: "Phone", key: "phone" },
-                { label: "Email", key: "email" }
+                { label: "Email", key: "email" },
               ]}
               filename="hospitals_export.csv"
               className="btn btn-success me-2"
@@ -238,60 +281,98 @@ function Hospitals() {
                 globalFilter={searchText}
                 setGlobalFilter={setSearchText}
                 className="form-control rounded-pill"
-                style={{ width: '100%' }} // Make search box full width on small screens
+                style={{ width: "100%" }} // Make search box full width on small screens
               />
             </div>
           </div>
         </Col>
       </Row>
 
-
-      <Table bordered hover striped responsive {...getTableProps()} className="table-custom">
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {currentHospitals.length > 0 ? (
-            currentHospitals.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()} key={i}>
-                  {row.cells.map(cell => (
-                    <td {...cell.getCellProps()} key={cell.column.id} style={{ width: cell.column.width }}>
-                      {cell.render('Cell')}
-                    </td>
+      {loading ? (
+        <div
+          style={{
+            height: "70vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Loading />
+        </div>
+      ) : (
+        <div className="table-container">
+          <Table
+            bordered
+            hover
+            striped
+            responsive
+            {...getTableProps()}
+            // className="table-custom"
+            className="glass-table"
+          >
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
+                      {column.render("Header")}
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </th>
                   ))}
                 </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td colSpan={columns.length} className="text-center">No hospitals found.</td>
-            </tr>
-          )}
-        </tbody>
-      </Table>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {currentHospitals.length > 0 ? (
+                currentHospitals.map((row, i) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()} key={i}>
+                      {row.cells.map((cell) => (
+                        <td
+                          {...cell.getCellProps()}
+                          key={cell.column.id}
+                          style={{ width: cell.column.width }}
+                        >
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={columns.length} className="text-center">
+                    No hospitals found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
+      )}
 
       <Row className="align-items-center mt-3">
         <Col md={6}>
           <div className="d-flex align-items-center">
-            <div className="w-33 me-2"> {/* Adjust width here */}
+            <div className="w-33 me-2">
+              {" "}
+              {/* Adjust width here */}
               <Form.Select
                 size="sm"
                 value={itemsPerPage}
-                onChange={e => setItemsPerPage(parseInt(e.target.value, 10))}
+                onChange={(e) => setItemsPerPage(parseInt(e.target.value, 10))}
               >
-                {[5, 10, 15, 20].map(size => (
-                  <option key={size} value={size}>{size} per page</option>
+                {[5, 10, 15, 20].map((size) => (
+                  <option key={size} value={size}>
+                    {size} per page
+                  </option>
                 ))}
               </Form.Select>
             </div>
@@ -300,18 +381,30 @@ function Hospitals() {
         </Col>
 
         <Col md={6} className="d-flex justify-content-end align-items-center">
-          <InputGroup size="sm" className="me-2" style={{ width: '150px', marginBottom: '1rem' }}>
+          <InputGroup
+            size="sm"
+            className="me-2"
+            style={{ width: "150px", marginBottom: "1rem" }}
+          >
             <Form.Control
               type="number"
               value={gotoPage}
-              onChange={e => setGotoPage(e.target.value)}
+              onChange={(e) => setGotoPage(e.target.value)}
               placeholder="Go to page"
             />
             <Button onClick={handleGotoPage}>Go</Button>
           </InputGroup>
           <Pagination size="sm">
-            <Pagination.First onClick={() => setCurrentPage(1)} disabled={currentPage === 1} />
-            <Pagination.Prev onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)} disabled={currentPage === 1} />
+            <Pagination.First
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+            />
+            <Pagination.Prev
+              onClick={() =>
+                setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+              }
+              disabled={currentPage === 1}
+            />
             {Array.from({ length: totalPages }, (_, i) => (
               <Pagination.Item
                 key={i + 1}
@@ -321,8 +414,18 @@ function Hospitals() {
                 {i + 1}
               </Pagination.Item>
             ))}
-            <Pagination.Next onClick={() => setCurrentPage(currentPage < totalPages ? currentPage + 1 : totalPages)} disabled={currentPage === totalPages} />
-            <Pagination.Last onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages} />
+            <Pagination.Next
+              onClick={() =>
+                setCurrentPage(
+                  currentPage < totalPages ? currentPage + 1 : totalPages
+                )
+              }
+              disabled={currentPage === totalPages}
+            />
+            <Pagination.Last
+              onClick={() => setCurrentPage(totalPages)}
+              disabled={currentPage === totalPages}
+            />
           </Pagination>
         </Col>
       </Row>

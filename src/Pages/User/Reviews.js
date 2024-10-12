@@ -16,6 +16,7 @@ const Star = ({ filled, onClick }) => {
 };
 
 function Reviews() {
+  const [loading, setloading] = useState(false);
   const customerReviews = [
     {
       name: "John Doe",
