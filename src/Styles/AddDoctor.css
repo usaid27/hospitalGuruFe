@@ -1,0 +1,153 @@
+/* Container with centered 3D card */
+.doctoradmin-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background: linear-gradient(135deg, #eef5f9 0%, #c9d6ff 100%); */
+    background: transparent;
+    overflow: auto;
+    padding: 20px;
+  }
+  
+  /* Card with 3D effect */
+  .doctoradmin-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px) saturate(180%);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s, box-shadow 0.5s;
+    width: 90%;
+    /* max-width: 1000px; */
+    padding: 20px;
+  }
+  
+  /* Hover animation for card */
+  .doctoradmin-card:hover {
+    transform: scale(1.02) rotateX(5deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Inner content with responsive layout */
+  .doctoradmin-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Form section styling */
+  .formadmin-section {
+    flex: 1;
+    min-width: 300px;
+    height: 70vh;
+    max-height: 70vh;
+    overflow-y: scroll;
+  }
+  
+  .animatedadmin-title {
+    font-size: 2rem;
+    color: #9d2553;
+    margin-bottom: 20px;
+    animation: fadeInDown 1.2s ease-out;
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Underline animation for the title */
+  .animatedadmin-title::after {
+    content: "";
+    width: 0;
+    height: 3px;
+    background: #9d2553;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    animation: underlineExpand 1.2s forwards;
+  }
+  
+  /* Form fields styling */
+  .formadmin-fields .formadmin-group {
+    margin-bottom: 15px;
+  }
+  
+  .formadmin-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .btn {
+    /* padding: 8px 16px; */
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .btn-primary:hover {
+    /* background-color: #8a1e48; */
+    transform: translateY(-3px);
+  }
+  
+  .btn-secondary:hover {
+    background-color: #666;
+    transform: translateY(-3px);
+  }
+  
+  /* Image preview styling */
+  .image-preview {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .preview-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  
+  .preview-img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Animations */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes underlineExpand {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .doctoradmin-card-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .preview-img {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  

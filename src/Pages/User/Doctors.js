@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import DoctorCard from "../../Components/DoctorCard";
 import profile1 from "../../Assets/profile-1.png";
-import profile2 from "../../Assets/profile-2.png";
-import profile3 from "../../Assets/profile-3.png";
-import profile4 from "../../Assets/profile-4.png";
+// import profile2 from "../../Assets/profile-2.png";
+// import profile3 from "../../Assets/profile-3.png";
+// import profile4 from "../../Assets/profile-4.png";
 import "../../Styles/Doctors.css";
 import Navbar from "../../Components/Navbar"; // Import Navbar
 import Footer from "../../Components/Footer";
@@ -11,6 +11,7 @@ import DocProfile from "../../Components/DocProfile";
 import filterGif from "../../Assets/icons8-filter.gif";
 import { baseUrl } from "../../Constants";
 import axios from "axios";
+import Loading from "../Loading";
 
 function Doctors() {
   console.log(baseUrl);
@@ -18,6 +19,7 @@ function Doctors() {
   const [DocprofileModal, setDocprofileModal] = useState(false);
   const [docInfo, setdocInfo] = useState();
   const [isFilterOpen, setIsFilterOpen] = useState(false); // State to control filter panel
+  const [loading, setloading] = useState(false);
   const [filters, setFilters] = useState({
     city: "",
     experience: "",
@@ -28,14 +30,19 @@ function Doctors() {
   }, []);
 
   const getallDoctors = async () => {
+    setloading(true);
     try {
-      const url = `${baseUrl}/api/App/all-doctors`;
-      console.log(url);
-      const response = await axios.get(`${baseUrl}/api/App/all-doctors`);
-      console.log(response.data);
-      setdocdata(response.data)
+      setTimeout(async () => {
+        const url = `${baseUrl}/api/App/all-doctors`;
+        console.log(url);
+        const response = await axios.get(`${baseUrl}/api/App/all-doctors`);
+        console.log(response.data);
+        setdocdata(response.data);
+        setloading(false);
+      }, 5000);
     } catch (error) {
       console.log(error);
+      setloading(false);
     }
   };
 
@@ -126,21 +133,24 @@ function Doctors() {
           </p>
         </div>
 
-        <div className="dt-cards-content">
-          {docdata && docdata.map((item)=>{
-            return(
-          <div onClick={()=>openDocProfile(item)}>
-            <DoctorCard
-              img={profile1}
-              item={item}
-              stars="4.9"
-              reviews="1800"
-            />
-          </div>
-
-            )
-          })}
-          {/* <DoctorCard
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="dt-cards-content">
+            {docdata &&
+              docdata.map((item) => {
+                return (
+                  <div onClick={() => openDocProfile(item)}>
+                    <DoctorCard
+                      img={profile1}
+                      item={item}
+                      stars="4.9"
+                      reviews="1800"
+                    />
+                  </div>
+                );
+              })}
+            {/* <DoctorCard
             img={profile2}
             name="Dr. Jacob Jones"
             title="Hematologists"
@@ -161,7 +171,8 @@ function Doctors() {
             stars="4.8"
             reviews="500"
           /> */}
-        </div>
+          </div>
+        )}
       </div>
       {/* Adding Footer at the end */}
       <Footer />
