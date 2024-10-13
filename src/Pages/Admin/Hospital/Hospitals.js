@@ -36,6 +36,7 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
       }}
       placeholder={`Search...`}
       className="me-2"
+      style={{height: "5vh"}}
     />
   );
 }
