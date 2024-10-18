@@ -1,0 +1,152 @@
+/* General Styles */
+.profile-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  /* Sidebar Styling */
+  .sidebar {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .nav-link {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .nav-link.active {
+    font-weight: bold;
+    color: #fafafb;
+    background-color: #007bff;
+  }
+
+  
+  .change-password form {
+    width: 100%;
+    margin-top: 1%;
+  }
+  
+  
+  /* Content Section */
+  .content-container {
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  /* Cover Image Styles */
+  .cover-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Profile Picture */
+  .profile-picture {
+    position: absolute;
+    bottom: -40px;
+    left: 45%;
+    width: 80px;
+    height: 80px;
+    border: 3px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  /* User Info Card */
+  .user-info {
+    margin-top: 60px;
+    border-radius: 10px;
+  }
+  
+  /* Profile Picture */
+.profile-picture {
+    position: absolute;
+    bottom: -40px;  /* Ensures it's slightly below the cover image */
+    left: 50%;  /* Center it horizontally */
+    transform: translateX(-50%);  /* Adjust for exact centering */
+    width: 80px;
+    height: 80px;
+    border: 3px solid white;
+    border-radius: 50%;  /* Makes it a perfect circle */
+    overflow: hidden;
+    background-color: white;  /* Prevents image overflow glitches */
+}
+
+/* Optional: Add some shadow for better visibility */
+.profile-picture img {
+    width: 100%;  /* Ensure the image fills the container */
+    height: 100%;  /* Maintain the aspect ratio */
+    object-fit: cover;  /* Prevent distortion */
+    border-radius: 50%;  /* Ensure the image stays circular */
+}
+
+/* Cover Image Styles */
+.cover-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background-color: #e9ecef;  /* Optional: Placeholder background */
+}
+
+
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .content-container {
+        padding: 10px;
+    }
+}
+
+/* Cover Image Styles */
+.cover-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Profile Picture */
+.profile-picture {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border: 3px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}

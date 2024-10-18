@@ -4,6 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "../Styles/HospitalProfile.css"; // Ensure to create and link your CSS file
 import ContactModal from "./ContactModal";
+import hospitalImage from "../Assets/hospital-icon.jpg";
 import axios from "axios";
 import { baseUrl } from "../Constants";
 
@@ -59,13 +60,19 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
     setContactmodal(false);
   };
 
+  const convertByteArrayToImage = (base64String) => {
+    return base64String
+      ? `data:image/jpeg;base64,${base64String}`
+      : hospitalImage;
+  };
+
   return (
     <div className="modal-background">
       <div className="modal-container">
         {/* Hospital Image */}
         <div className="hospital-img-container">
           <img
-            src={HospitalDetails.img}
+            src={convertByteArrayToImage(HospitalDetails.imageFile)}
             alt={`${HospitalDetails.name}`}
             className="hospital-img"
           />

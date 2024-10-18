@@ -7,6 +7,7 @@ import profile1 from "../../Assets/profile-1.png";
 import "../../Styles/Doctors.css";
 import Navbar from "../../Components/Navbar"; // Import Navbar
 import Footer from "../../Components/Footer";
+import doctorImage from "../../Assets/doctor.png";
 import DocProfile from "../../Components/DocProfile";
 import filterGif from "../../Assets/icons8-filter.gif";
 import { baseUrl } from "../../Constants";
@@ -66,6 +67,11 @@ function Doctors() {
     });
   };
 
+  const convertByteArrayToImage = (base64String) => {
+    return base64String
+      ? `data:image/jpeg;base64,${base64String}`
+      : doctorImage;
+  };
   console.log(DocprofileModal);
   return (
     <>
@@ -142,7 +148,7 @@ function Doctors() {
                 return (
                   <div onClick={() => openDocProfile(item)}>
                     <DoctorCard
-                      img={profile1}
+                      img={convertByteArrayToImage(item.image)}
                       item={item}
                       stars="4.9"
                       reviews="1800"

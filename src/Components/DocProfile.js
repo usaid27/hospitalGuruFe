@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import ContactModal from "./ContactModal";
 import { baseUrl } from "../Constants";
+import doctorImage from "../Assets/doctor.png";
 import axios from "axios";
 
 const DocProfile = (props) => {
@@ -29,6 +30,11 @@ const DocProfile = (props) => {
   };
   const handelContactModal = () => {
     setContactmodal(false);
+  };
+  const convertByteArrayToImage = (base64String) => {
+    return base64String
+      ? `data:image/jpeg;base64,${base64String}`
+      : doctorImage;
   };
   return (
     <div
@@ -110,7 +116,7 @@ const DocProfile = (props) => {
                 }}
               >
                 <img
-                  src={docdetails.image}
+                  src={convertByteArrayToImage(props.docInfo.image)}
                   alt="Doctor"
                   style={{
                     width: "100%",
