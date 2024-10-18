@@ -72,7 +72,7 @@ function EditDoctorPage() {
 
     // Include new image if provided
     if (image) {
-      formData.append("image", image);
+      formData.append("ImageFormFile", image);
     }
 
     try {

@@ -26,6 +26,8 @@ import EditProcedurePage from './Pages/Admin/Procedure/EditProcedurePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from './Components/PrivateRoute';
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer
+import Users from './Pages/Admin/Users';
+import Registration from './Pages/Auth/Registration';
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
           <Route path="/legal" element={<Legal />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<Registration />} />
           <Route path="/admin" element={<PrivateRoute element={AdminLayout} />}>
             <Route path="dashboard" element={<PrivateRoute element={Dashboard} />} />
             <Route path="doctors" element={<PrivateRoute element={DoctorsConfig} />} />
@@ -52,6 +55,7 @@ function App() {
             <Route path="procedures/edit-procedure/:id" element={<EditProcedurePage />} />
             <Route path="hospitals" element={<PrivateRoute element={HospitalsConfig} />} />
             <Route path="procedures" element={<PrivateRoute element={Procedures} />} />
+            <Route path="Profile" element={<PrivateRoute element={Users} />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

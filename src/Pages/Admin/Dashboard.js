@@ -146,7 +146,12 @@ function Dashboard() {
         <Grid item xs={12}>
           <Card className="Dashboardglass-card">
             <CardContent>
-              <Typography variant="h6" style={{marginBottom:"10px",textAlign:"center"}}>Revenue and Sales</Typography>
+              <Typography
+                variant="h6"
+                style={{ marginBottom: "10px", textAlign: "center" }}
+              >
+                Revenue and Sales
+              </Typography>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
                   <Card className="Dashboardglass-card">

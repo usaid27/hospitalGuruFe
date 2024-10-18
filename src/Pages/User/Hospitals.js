@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import profile1 from "../../Assets/hospital-sign.webp";
 import profile2 from "../../Assets/modern-hospital-building (1).webp";
 import profile3 from "../../Assets/modern-hospital-building.webp";
+import hospitalImage from "../../Assets/hospital-icon.jpg";
 // import profile4 from "../../Assets/profile-4.png";
 import "../../Styles/Doctors.css";
 import Navbar from "../../Components/Navbar"; // Import Navbar
@@ -88,6 +89,12 @@ function Hospitals() {
       ...filters,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const convertByteArrayToImage = (base64String) => {
+    return base64String
+      ? `data:image/jpeg;base64,${base64String}`
+      : hospitalImage;
   };
 
   return (
@@ -198,7 +205,7 @@ function Hospitals() {
                   >
                     {/* <img src={item.imageFile} alt={item.name} className="dt-card-img" /> */}
                     <img
-                      src={profile1}
+                      src={convertByteArrayToImage(item.imageFile)}
                       alt={item.name}
                       className="dt-card-img"
                     />

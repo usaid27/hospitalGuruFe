@@ -56,10 +56,18 @@ function AdminLayout() {
   };
 
   const handleProfileMenuOpen = (event) => {
+    console.log(event)
     setAnchorEl(event.currentTarget);
   };
 
   const handleProfileMenuClose = () => {
+    console.log("clicked")
+    setAnchorEl(null);
+  };
+  const handleProfileMenu = () => {
+    // console.log("clicked")
+    // setAnchorEl(null);
+    navigate("Profile")
     setAnchorEl(null);
   };
 
@@ -269,18 +277,18 @@ function AdminLayout() {
             open={isMenuOpen}
             onClose={handleProfileMenuClose}
           >
-            <MenuItem onClick={handleProfileMenuClose}>
+            <MenuItem onClick={handleProfileMenu}>
               <ListItemIcon>
                 <AccountCircleIcon fontSize="small" />
               </ListItemIcon>
               Profile
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuClose}>
+            {/* <MenuItem onClick={handleProfileMenuClose}>
               <ListItemIcon>
                 <SettingsIcon fontSize="small" />
               </ListItemIcon>
               Settings
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <LogoutIcon fontSize="small" />

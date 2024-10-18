@@ -1,40 +1,32 @@
-// src/Pages/Auth/LoginPage.js
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../Services/apiService";
+import { register } from "../../Services/apiService";
 import { useAuth } from "../../contexts/AuthContext";
-import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
-import { baseUrl } from "../../Constants";
 
-function LoginPage() {
+const Registration = () => {
+  const [userName, setuseName] = useState("");
   const [email, setEmail] = useState("");
+  const [MobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmpassword, setconfirmpassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [adminAccount, setadminAccount] = useState();
   const { login: setLoginStatus } = useAuth(); // Import the login function
   const navigate = useNavigate();
+  
+  
 
-  useEffect(() => {
-    getusercount();
-  }, []);
-
-  const getusercount = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/api/Account/UserCount`);
-      console.log(response);
-      setadminAccount(response.data);
-      // setadminAccount(0);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const data = await login(email, password);
+      const data = await register(
+        userName,
+        email,
+        password,
+        MobileNumber,
+        confirmpassword
+      );
       console.log("Logged in:", data);
       setLoginStatus(); // Set authentication status
       navigate("/admin/dashboard"); // Redirect to admin after successful login
@@ -47,11 +39,9 @@ function LoginPage() {
       setIsLoading(false);
     }
   };
-
-  const handelRegistration = () => {
-    navigate("/register");
-  };
-
+  const handelLogin = () =>{
+    navigate("/login")
+  }
   return (
     <div
       className="Container"
@@ -84,11 +74,29 @@ function LoginPage() {
         <p style={{ alignSelf: "center", color: "white", fontWeight: "bold" }}>
           Hospital Guru
         </p>
-        <h5 className="text-center mb-4">Sign In</h5>
+        <h5 className="text-center mb-4">Sign up</h5>
         {errorMessage && (
           <div className="alert alert-danger">{errorMessage}</div>
         )}
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
+          <div className="mb-3">
+            <label
+              htmlFor="username"
+              className="form-label"
+              style={{ width: "100%", color: "white", marginLeft: "2%" }}
+            >
+              User Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              placeholder="Enter user Name"
+              value={userName}
+              onChange={(e) => setuseName(e.target.value)}
+              required
+            />
+          </div>
           <div className="mb-3">
             <label
               htmlFor="email"
@@ -104,6 +112,24 @@ function LoginPage() {
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label
+              htmlFor="Mobileno"
+              className="form-label"
+              style={{ width: "100%", color: "white", marginLeft: "2%" }}
+            >
+              Mobile Number
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="Mobileno"
+              placeholder="Enter Mobile Number"
+              value={MobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
               required
             />
           </div>
@@ -125,25 +151,28 @@ function LoginPage() {
               required
             />
           </div>
+          <div className="mb-3">
+            <label
+              htmlFor="confirmpassword"
+              className="form-label"
+              style={{ width: "100%", color: "white", marginLeft: "2%" }}
+            >
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="confirmpassword"
+              placeholder="Confirm password"
+              value={confirmpassword}
+              onChange={(e) => setconfirmpassword(e.target.value)}
+              required
+            />
+          </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="flexCheckDefault"
-              />
-              <label
-                className="form-check-label"
-                htmlFor="flexCheckDefault"
-                style={{ width: "100%", color: "white", margin: "2%" }}
-              >
-                Remember me
-              </label>
-            </div>
             <div>
-              <p style={{ color: "white", cursor: "pointer" }}>
-                Forget Password?
+              <p style={{ color: "white", cursor: "pointer" }}onClick={handelLogin}>
+                Sign In?
               </p>
             </div>
           </div>
@@ -160,24 +189,14 @@ function LoginPage() {
                   aria-hidden="true"
                 ></span>
               ) : (
-                "Sign In"
+                "Sign up"
               )}
             </button>
           </div>
-          {adminAccount <= 0 ? (
-            <div>
-              <p
-                style={{ color: "white", cursor: "pointer" }}
-                onClick={handelRegistration}
-              >
-                New User?
-              </p>
-            </div>
-          ) : null}
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default Registration;

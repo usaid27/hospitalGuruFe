@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Styles/ProcedureModal.css"; // Assuming a new CSS file for the modal
 import { baseUrl } from "../../Constants";
 import axios from "axios";
+import procedureImage from "../../Assets/Procedure.png";
 
 const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
-  const id = 1;
+  // const id = 1;
+  const [ProcedureProfile, setProcedureProfile] = useState({});
 
+  console.log(proceduredata);
   const dummyDoctors = ["Dr. John Doe", "Dr. Sarah Connor", "Dr. James Smith"];
   const dummyHospitals = [
     "City Hospital",
@@ -19,11 +22,19 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
 
   const getProcedureDetails = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/App/Procedure/${id}`);
+      const response = await axios.get(
+        `${baseUrl}/api/App/Procedure/${proceduredata.id}`
+      );
       console.log(response);
+      setProcedureProfile(response.data);
     } catch (error) {
       console.log(error);
     }
+  };
+  const convertByteArrayToImage = (base64String) => {
+    return base64String
+      ? `data:image/jpeg;base64,${base64String}`
+      : procedureImage;
   };
 
   return (
@@ -45,7 +56,7 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
             color: "#333",
           }}
         >
-          {proceduredata.name || "Procedure Name"}
+          {ProcedureProfile.procedureName || "Procedure Name"}
         </h2>
 
         <div
@@ -59,8 +70,8 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
         >
           <div className="modal-Procedureimage">
             <img
-              src={proceduredata.img}
-              alt={proceduredata.name}
+              src={convertByteArrayToImage(ProcedureProfile.introductionMedia)}
+              alt={ProcedureProfile.procedureName}
               style={{
                 maxWidth: "150px",
                 borderRadius: "10px",
@@ -73,11 +84,12 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
           <div className="modal-Procedureinfo">
             <p>
               <strong>Description:</strong>{" "}
-              {proceduredata.description || "Description not available."}
+              {ProcedureProfile.procedureOverview ||
+                "Description not available."}
             </p>
             <p>
               <strong>Duration:</strong>{" "}
-              {proceduredata.duration || "Duration not available."}
+              {ProcedureProfile.typicalDuration || "Duration not available."}
             </p>
           </div>
         </div>
@@ -86,13 +98,16 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
         <div className="modal-Proceduresection">
           <h3>Specialist Doctors</h3>
           <ul>
-            {proceduredata.doctors?.length > 0
-              ? proceduredata.doctors.map((doctor, index) => (
-                  <li key={index}>{doctor}</li>
-                ))
-              : dummyDoctors.map((doctor, index) => (
-                  <li key={index}>{doctor}</li>
-                ))}
+            {
+              ProcedureProfile.procedureDoctorMapping?.length > 0
+                ? ProcedureProfile.procedureDoctorMapping.map(
+                    (doctor, index) => <li key={index}>{doctor}</li>
+                  )
+                : null
+              // dummyDoctors.map((doctor, index) => (
+              //     <li key={index}>{doctor}</li>
+              //   ))
+            }
           </ul>
         </div>
 
@@ -100,13 +115,16 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
         <div className="modal-Proceduresection">
           <h3>Hospitals</h3>
           <ul>
-            {proceduredata.hospitals?.length > 0
-              ? proceduredata.hospitals.map((hospital, index) => (
-                  <li key={index}>{hospital}</li>
-                ))
-              : dummyHospitals.map((hospital, index) => (
-                  <li key={index}>{hospital}</li>
-                ))}
+            {
+              ProcedureProfile.procedureHospitalMapping?.length > 0
+                ? ProcedureProfile.procedureHospitalMapping.map(
+                    (hospital, index) => <li key={index}>{hospital}</li>
+                  )
+                : null
+              // dummyHospitals.map((hospital, index) => (
+              //     <li key={index}>{hospital}</li>
+              //   ))
+            }
           </ul>
         </div>
 
