@@ -390,7 +390,7 @@ const DocProfile = (props) => {
       </div>
       {Contactmodal && (
         <ContactModal
-          DocDetails="Dr. Salena Doe"
+          DocDetails={docdetails}
           ContactModal={handelContactModal}
         />
       )}

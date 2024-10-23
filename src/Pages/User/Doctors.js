@@ -33,14 +33,14 @@ function Doctors() {
   const getallDoctors = async () => {
     setloading(true);
     try {
-      setTimeout(async () => {
+      // setTimeout(async () => {
         const url = `${baseUrl}/api/App/all-doctors`;
         console.log(url);
         const response = await axios.get(`${baseUrl}/api/App/all-doctors`);
         console.log(response.data);
         setdocdata(response.data);
         setloading(false);
-      }, 5000);
+      // }, 5000);
     } catch (error) {
       console.log(error);
       setloading(false);

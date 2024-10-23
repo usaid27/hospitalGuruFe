@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "../Constants";
-
+import Cookies from "js-cookie";
 // const API_BASE_URL = "https://localhost:7231/api/";
 
 // Authentication endpoints (AccountController)
@@ -23,6 +23,16 @@ export const register = async (
       confirmpassword,
       rememberMe,
     });
+    const token = response.data.token;
+    // localStorage.setItem("token", response.data.token);
+    if (rememberMe) {
+      Cookies.set("authToken", token, { expires: 7 });
+      // localStorage.setItem("token", response.data.token);
+    } else {
+      // console.log("Setting session-only cookie");
+      Cookies.set("authToken", token);
+      // localStorage.setItem("token", response.data.token);
+    }
     return response.data;
   } catch (error) {
     console.error("Registration error", error);
@@ -30,17 +40,27 @@ export const register = async (
   }
 };
 
-export const login = async (userEmail, password, rememberMe = true) => {
+export const login = async (userEmail, password, rememberMe) => {
   try {
     // console.log(userEmail)
     // console.log(password)
-    // console.log(rememberMe)
+    console.log(rememberMe)
     const response = await axios.post(`${AUTH_API_URL}login`, {
       userEmail,
       password,
       rememberMe,
     });
-    localStorage.setItem("token", response.data.token);
+    const token = response.data.token;
+    console.log(rememberMe)
+    // localStorage.setItem("token", response.data.token);
+    if (rememberMe) {
+      Cookies.set("authToken", token, { expires: 7 });
+      // localStorage.setItem("token", response.data.token);
+    } else {
+      // console.log("Setting session-only cookie");
+      Cookies.set("authToken", token);
+      // localStorage.setItem("token", response.data.token);
+    }
     return response.data;
   } catch (error) {
     console.error("Login error", error);
@@ -55,7 +75,8 @@ export const logout = async () => {
       {},
       { headers: getAuthHeaders() }
     );
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
+    Cookies.remove("authToken");
   } catch (error) {
     console.error("Logout error", error);
     throw error;
@@ -67,7 +88,8 @@ const APP_API_URL = `${baseUrl}/api/app/`;
 
 // Utility function to get the token from localStorage
 const getAuthToken = () => {
-  return localStorage.getItem("token");
+  // return localStorage.getItem("token");
+  return Cookies.get("authToken"); ;
 };
 
 const getAuthHeaders = () => {
