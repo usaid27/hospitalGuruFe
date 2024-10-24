@@ -9,12 +9,12 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
   const [ProcedureProfile, setProcedureProfile] = useState({});
 
   console.log(proceduredata);
-  const dummyDoctors = ["Dr. John Doe", "Dr. Sarah Connor", "Dr. James Smith"];
-  const dummyHospitals = [
-    "City Hospital",
-    "National Medical Center",
-    "Greenfield Hospital",
-  ];
+  // const dummyDoctors = ["Dr. John Doe", "Dr. Sarah Connor", "Dr. James Smith"];
+  // const dummyHospitals = [
+  //   "City Hospital",
+  //   "National Medical Center",
+  //   "Greenfield Hospital",
+  // ];
 
   useEffect(() => {
     getProcedureDetails();
