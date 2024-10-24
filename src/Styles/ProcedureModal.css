@@ -1,0 +1,141 @@
+.modal-Procedureoverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 6;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-Procedurecontainer {
+    background: linear-gradient(135deg, #fff, #f0f0f0);
+    padding: 30px;
+    border-radius: 15px;
+    width: 70%;
+    /* max-width: 600px; */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: scale(0.8);
+    animation: zoomIn 0.5s forwards;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.close-icon:hover {
+    opacity: 1;
+}
+
+
+.modal-image img:hover {
+    transform: scale(1.05);
+}
+
+.modal-Procedureinfo p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #666;
+}
+
+.modal-Proceduresection {
+    margin-top: 30px;
+}
+
+.modal-Proceduresection h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #9D2553;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.modal-Proceduresection ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-Proceduresection ul li {
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.modal-Proceduresection ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.close-btn {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #9D2553, #731943);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn:hover {
+    background: #8a2041;
+}
+
+@media (max-width: 600px) {
+    .modal-Procedurebody {
+        flex-direction: column;
+    }
+    
+    .modal-Procedurecontainer {
+        width: 95%;
+    }
+
+    .modal-Proceduretitle {
+        font-size: 24px;
+    }
+    
+    .modal-Proceduresection h3 {
+        font-size: 20px;
+    }
+}

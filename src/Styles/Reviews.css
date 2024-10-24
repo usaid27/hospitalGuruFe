@@ -1,0 +1,126 @@
+.review-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.rw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.rw-text-title {
+  text-align: center;
+  flex-grow: 1;
+  font-size: 2.5rem;
+  font-family: "Arial", sans-serif;
+  animation: titleAnimation 2s ease-in-out;
+}
+
+/* Add underline with animation */
+.rw-text-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 5px;
+  background: #9d2553;
+  margin: 0.5rem auto;
+  animation: underlineAnimation 2s ease-in-out;
+}
+
+.give-review-btn {
+  background-color: #9d2553;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.give-review-btn:hover {
+  background-color: #8a2041;
+}
+
+.rw-review-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in;
+  margin: 3%;
+}
+.star {
+  font-size: 24px;
+  color: #ccc; /* Default color for unfilled stars */
+  margin-right: 5px;
+  transition: color 0.3s;
+}
+
+.star.filled {
+  color: #ffd700; /* Color for filled stars */
+}
+
+
+.MainmodalContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 1;
+    animation: fadeIn 0.5s ease-in;
+}
+.ModalContainer{
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    background-color: #DDE5F8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.formContainer{
+    padding: 20px;
+}
+.ReviewsInput{
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.submit-btn {
+  padding: 12px;
+  width: 100%;
+  /* background-color: #9d2553; */
+  background-color: #1A8EFD;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #8a2041;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,25 @@
+.Dashboardglass-card {
+  background: rgba(255, 255, 255, 0.2); /* Transparent white */
+  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Border to match theme */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #ff6384;
+}
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Dashboardglass-card:hover {
+  transform: translateY(-10px); /* Hover animation: lift up */
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.Dashboardglass-card-content {
+  text-align: center;
+  color: #fff; /* Text color */
+}

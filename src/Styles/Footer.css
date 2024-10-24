@@ -1,0 +1,299 @@
+.footer-section {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* height: 73vh; */
+}
+.footerInfo{
+    position: absolute;
+    /* background-color: #293241; */
+    opacity: 0.8;
+    width: 100%;
+    height: 73vh;
+}
+.footerbgimg{
+    width: 100%;
+    height: 73vh; 
+    filter: blur(2px);
+    /* Allow the image to grow with the text */
+    /* max-height: 73vh; Set a minimum height */
+    /* object-fit: cover; */
+}
+.footer-container {
+    /* position: absolute; */
+    padding: 25px 25px 0 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    color: white;
+    border-bottom: 2px solid #293241;
+    border-radius: 2px;
+}
+
+/* Title with Logo */
+.ft-title {
+    display: flex;
+    align-items: center;
+    color: #1A8EFD;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 6vh;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
+
+.footer-logo {
+    width: 40px; 
+    height: auto; 
+    margin-right: 12px;
+}
+
+/* Description */
+.ft-description {
+    width: 420px;
+    margin: 10px 0 10px;
+    color: #D0D3DA;
+    font-family: 'Rubik', sans-serif;
+    font-size: 4vh;
+    letter-spacing: .8px;
+    line-height: 1.7rem;
+}
+
+/* Input Fields */
+.ft-input-title {
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-size: 5vh;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
+
+.ft-input {
+    width: 20vw;
+    margin: 0vh 8px 0 0;
+    padding: 16px 22px;
+    color: white;
+    background-color: #9da2aa;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    outline: transparent;
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    letter-spacing: .8px;
+}
+
+.ft-btn {
+    padding: 14px 18px;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    outline: transparent;
+    background-color: #1A8EFD;
+    font-size: 18px;
+    font-family: 'Rubik', sans-serif;
+    letter-spacing: .8px;
+    cursor: pointer;
+    transition: all .4s ease;
+}
+
+.ft-btn:hover {
+    color: #1A8EFD;
+    background-color: white;
+    border: 2px solid #1A8EFD;
+}
+
+/* Lists */
+.ft-list-title {
+    margin: 4vh 0;
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: .8px;
+    position: relative;
+    padding-bottom: 8px; /* Add some padding to make room for the underline */
+}
+
+.ft-list-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 35%; /* Adjust the width to your liking */
+    height: 4px;
+    background-color: #9D2553;
+}
+
+.ft-list ul {
+    padding-left: 0;
+}
+
+.ft-list-items {
+    list-style-type: none;
+}
+
+.ft-list-items li {
+    margin: 5vh 0;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
+
+.ft-list-items li a {
+    text-decoration: none;
+    color: #a5a7ac;
+    padding: 0 0 2px 0;
+    border-bottom: 2px dotted transparent;
+    transition: border .2s ease;
+}
+
+.ft-list-items li a:hover {
+    border-bottom: 2px solid #9D2553;
+}
+.ft-underline{
+    border-bottom: 4px solid #9D2553;
+}
+
+/* CopyRight */
+.ft-copyright {
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* color: #cbcdd3; */
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-size: 3vh;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
+
+.ft-social-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.ft-social-links li a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #cbcdd3;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ft-social-links li a svg {
+    width: 24px;
+    height: 24px;
+    padding: 1px;
+}
+
+.ft-social-links li a svg path {
+    fill: #cbcdd3;
+}
+
+.ft-social-links li a:hover, .ft-social-links li a:hover svg path {
+    fill: #1A8EFD;
+    border: 2px solid #1A8EFD;
+}
+
+/* Responsive */
+@media (max-width: 1520px) {
+    .footerbgimg{
+        width: 100%;
+        height: 100vh; 
+        filter: blur(2px);
+        /* Allow the image to grow with the text */
+        /* max-height: 73vh; Set a minimum height */
+        /* object-fit: cover; */
+    }
+    .footerInfo{
+        position: absolute;
+        /* background-color: #293241; */
+        opacity: 0.8;
+        width: 100%;
+        height: 100vh;
+    }
+    .ft-copyright {
+        padding: 2vh 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* color: #cbcdd3; */
+        color: white;
+        font-family: 'Rubik', sans-serif;
+        font-weight: bold;
+        letter-spacing: .8px;
+    }
+}
+@media (max-width: 1075px) {
+    .footerbgimg{
+        width: 100%;
+        height: 150vh; 
+        filter: blur(2px);
+        /* Allow the image to grow with the text */
+        /* max-height: 73vh; Set a minimum height */
+        /* object-fit: cover; */
+    }
+    .footerInfo{
+        position: absolute;
+        /* background-color: #293241; */
+        opacity: 0.8;
+        width: 100%;
+        height: 150vh;
+    }
+}
+@media (max-width: 757px) {
+    /* .footer-container {
+        padding: 24px;
+    }
+
+    .ft-description {
+        width: 100%;
+        margin: 16px 0 24px;
+    }
+
+    .ft-input {
+        width: 100%;
+        margin: 16px 0;
+    }
+
+    .ft-btn {
+        width: 100%;
+        margin: 0 0 16px;
+    }
+
+    .ft-copyright {
+        padding: 18px;
+        display: block;
+        text-align: center;
+    }
+
+    .ft-social-links {
+        margin: 16px 0 0;
+    } */
+    .footerbgimg{
+        width: 100%;
+        height: 230vh; 
+        filter: blur(2px);
+        /* Allow the image to grow with the text */
+        /* max-height: 73vh; Set a minimum height */
+        /* object-fit: cover; */
+    }
+    .footerInfo{
+        position: absolute;
+        /* background-color: #293241; */
+        opacity: 0.8;
+        width: 100%;
+        height: 230vh;
+    }
+}
