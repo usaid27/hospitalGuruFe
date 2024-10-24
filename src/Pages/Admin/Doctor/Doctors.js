@@ -23,8 +23,6 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
     setGlobalFilter(value || undefined);
   };
 
-  
-
   return (
     <Form.Control
       size="sm"
@@ -36,7 +34,7 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
       }}
       placeholder={`Search...`}
       className="me-2"
-      style={{height: "5vh"}}
+      style={{ height: "5vh" }}
     />
   );
 }
@@ -334,7 +332,7 @@ function Doctors() {
                 globalFilter={searchText}
                 setGlobalFilter={setSearchText}
                 className="form-control rounded-pill"
-                style={{ width: "100%"}} // Make search box full width on small screens
+                style={{ width: "100%" }} // Make search box full width on small screens
               />
             </div>
           </div>
@@ -475,7 +473,7 @@ function Doctors() {
           onClose={handleCloseDialog}
           doctor={selectedDoctor}
         />
-      ):null}
+      ) : null}
     </Container>
   );
 }

@@ -221,7 +221,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
       </div>
       {Contactmodal && (
         <ContactModal
-          HospitalInfo={HospitalInfo}
+          HospitalInfo={HospitalDetails}
           ContactModal={handelContactModal}
         />
       )}
