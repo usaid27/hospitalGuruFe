@@ -41,6 +41,7 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
     <div className="modal-Procedureoverlay">
       <div className="modal-Procedurecontainer">
         <img
+          
           src={require("../../Assets/icons8-close-window.gif")}
           alt="close"
           className="close-icon"
@@ -78,6 +79,7 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
                 marginBottom: "20px",
                 boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.3s ease",
+                width: "100%", height: "10vh"
               }}
             />
           </div>

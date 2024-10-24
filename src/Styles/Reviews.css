@@ -99,11 +99,11 @@
     transition: border-color 0.3s;
 }
 
-
 .submit-btn {
   padding: 12px;
   width: 100%;
-  background-color: #9d2553;
+  /* background-color: #9d2553; */
+  background-color: #1A8EFD;
   color: white;
   border: none;
   border-radius: 5px;

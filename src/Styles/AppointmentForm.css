@@ -39,7 +39,8 @@
   .form-Appointmenttitle {
     font-size: 2rem;
     font-weight: bold;
-    color: #9d2553;
+    /* color: #9d2553; */
+    color: black;
     margin-bottom: 3%;
   }
   
@@ -89,7 +90,8 @@
   }
   
   .Appointment-btn {
-    background-color: #9d2553;
+    /* background-color: #9d2553; */
+    background-color: #1A8EFD;
     color: #fff;
     padding: 12px;
     border: none;

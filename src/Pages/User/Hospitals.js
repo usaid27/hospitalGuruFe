@@ -133,7 +133,7 @@ function Hospitals() {
               <div className="filter-panel">
                 <h4>Filter by</h4>
                 <div className="filter-option">
-                  <label>City</label>
+                  <label style={{width:"100%"}}>City</label>
                   <select
                     name="city"
                     value={filters.city}
@@ -147,7 +147,7 @@ function Hospitals() {
                 </div>
 
                 <div className="filter-option">
-                  <label>Speciality of Diseases</label>
+                  <label style={{width:"100%"}}>Speciality of Diseases</label>
                   <select
                     name="experience"
                     value={filters.experience}

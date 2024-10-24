@@ -136,7 +136,7 @@ const MedicalProcedure = () => {
               >
                 <div className="card-content">
                   <div className="ProcedureImg">
-                    <img src={convertByteArrayToImage(item.introductionMedia)} />
+                    <img style={{width:"60%",height:"50%"}}src={convertByteArrayToImage(item.introductionMedia)} />
                   </div>
                   <div className="ProcedureInfo">
                     <h3 className="procedure-name page-title">{item.procedureName}</h3>

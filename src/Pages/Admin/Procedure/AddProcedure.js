@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import Select from "react-select"; // Import react-select
+import Loading from "../../Loading";
 
 function AddProcedure() {
   const [procedureName, setProcedureName] = useState("");
@@ -29,6 +30,7 @@ function AddProcedure() {
   const [selectedHospitals, setSelectedHospitals] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [hospitals, setHospitals] = useState([]);
+  const [loading, setloading] = useState(false);
   const [preview, setPreview] = useState(procedureImage); // Default preview image
   const navigate = useNavigate();
 
@@ -59,6 +61,7 @@ function AddProcedure() {
   }));
 
   const handleSubmit = async (e) => {
+    setloading(true);
     e.preventDefault();
     if (!procedureName || !procedureOverview) {
       toast.error("Please fill in all mandatory fields.");
@@ -126,6 +129,7 @@ function AddProcedure() {
       setReferenceLinks([""]);
       setSelectedDoctors([]);
       setSelectedHospitals([]);
+      setloading(false);
       navigate("/admin/procedures");
     } catch (error) {
       toast.error("Failed to add procedure.");
@@ -159,217 +163,223 @@ function AddProcedure() {
     // <Container fluid>
     //   <Row className="justify-content-center mt-5">
     //     <Col md={8}>
-    <div className="doctoradmin-form-container">
-      <div className="doctoradmin-card">
-        <h2 className="animatedadmin-title">Add Procedure</h2>
-        <div className="doctoradmin-card-content">
-          <div className="image-preview">
-            <img
-              src={preview}
-              alt="Introduction Media Preview"
-              className="preview-img"
-              //   style={{
-              //     width: "300px",
-              //     height: "300px",
-              //     objectFit: "cover",
-              //     borderRadius: "10px",
-              //     border: "2px solid #ddd",
-              //   }}
-            />
-          </div>
-        
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="doctoradmin-form-container">
+          <div className="doctoradmin-card">
+            <h2 className="animatedadmin-title">Add Procedure</h2>
+            <div className="doctoradmin-card-content">
+              <div className="image-preview">
+                <img
+                  src={preview}
+                  alt="Introduction Media Preview"
+                  className="preview-img"
+                  //   style={{
+                  //     width: "300px",
+                  //     height: "300px",
+                  //     objectFit: "cover",
+                  //     borderRadius: "10px",
+                  //     border: "2px solid #ddd",
+                  //   }}
+                />
+              </div>
 
-        <div className="formadmin-section">
-          <form onSubmit={handleSubmit} className="formadmin-fields">
-            {/* Procedure Name */}
-            <div className="formadmin-group">
-              <label style={{ width: "80%" }}>
-                Procedure Name <span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                value={procedureName}
-                onChange={(e) => setProcedureName(e.target.value)}
-                required
-              />
-            </div>
+              <div className="formadmin-section">
+                <form onSubmit={handleSubmit} className="formadmin-fields">
+                  {/* Procedure Name */}
+                  <div className="formadmin-group">
+                    <label style={{ width: "80%" }}>
+                      Procedure Name <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={procedureName}
+                      onChange={(e) => setProcedureName(e.target.value)}
+                      required
+                    />
+                  </div>
 
-            {/* Procedure Overview */}
-            <div className="formadmin-group mb-3">
-              <label>
-                Procedure Overview <span className="text-danger">*</span>
-              </label>
-              <textarea
-                className="form-control"
-                value={procedureOverview}
-                onChange={(e) => setProcedureOverview(e.target.value)}
-                required
-              />
-            </div>
+                  {/* Procedure Overview */}
+                  <div className="formadmin-group mb-3">
+                    <label>
+                      Procedure Overview <span className="text-danger">*</span>
+                    </label>
+                    <textarea
+                      className="form-control"
+                      value={procedureOverview}
+                      onChange={(e) => setProcedureOverview(e.target.value)}
+                      required
+                    />
+                  </div>
 
-            {/* Typical Duration */}
-            <div className="formadmin-group mb-3">
-              <label>Typical Duration</label>
-              <input
-                type="text"
-                className="form-control"
-                value={typicalDuration}
-                onChange={(e) => setTypicalDuration(e.target.value)}
-              />
-            </div>
+                  {/* Typical Duration */}
+                  <div className="formadmin-group mb-3">
+                    <label>Typical Duration</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={typicalDuration}
+                      onChange={(e) => setTypicalDuration(e.target.value)}
+                    />
+                  </div>
 
-            {/* Recovery Time */}
-            <div className="formadmin-group mb-3">
-              <label>Recovery Time</label>
-              <input
-                type="text"
-                className="form-control"
-                value={recoveryTime}
-                onChange={(e) => setRecoveryTime(e.target.value)}
-              />
-            </div>
+                  {/* Recovery Time */}
+                  <div className="formadmin-group mb-3">
+                    <label>Recovery Time</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={recoveryTime}
+                      onChange={(e) => setRecoveryTime(e.target.value)}
+                    />
+                  </div>
 
-            {/* Success Rate */}
-            <div className="formadmin-group mb-3">
-              <label>Success Rate (%)</label>
-              <input
-                type="number"
-                className="form-control"
-                value={successRate}
-                onChange={(e) => setSuccessRate(e.target.value)}
-                min="0"
-                max="100"
-                step="0.1"
-              />
-            </div>
+                  {/* Success Rate */}
+                  <div className="formadmin-group mb-3">
+                    <label>Success Rate (%)</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={successRate}
+                      onChange={(e) => setSuccessRate(e.target.value)}
+                      min="0"
+                      max="100"
+                      step="0.1"
+                    />
+                  </div>
 
-            {/* Causes */}
-            <div className="formadmin-group mb-3">
-              <label>Causes</label>
-              <textarea
-                className="form-control"
-                value={causes}
-                onChange={(e) => setCauses(e.target.value)}
-              />
-            </div>
+                  {/* Causes */}
+                  <div className="formadmin-group mb-3">
+                    <label>Causes</label>
+                    <textarea
+                      className="form-control"
+                      value={causes}
+                      onChange={(e) => setCauses(e.target.value)}
+                    />
+                  </div>
 
-            {/* Symptoms */}
-            <div className="formadmin-group mb-3">
-              <label>Symptoms</label>
-              <textarea
-                className="form-control"
-                value={symptoms}
-                onChange={(e) => setSymptoms(e.target.value)}
-              />
-            </div>
+                  {/* Symptoms */}
+                  <div className="formadmin-group mb-3">
+                    <label>Symptoms</label>
+                    <textarea
+                      className="form-control"
+                      value={symptoms}
+                      onChange={(e) => setSymptoms(e.target.value)}
+                    />
+                  </div>
 
-            {/* Diagnosis */}
-            <div className="formadmin-group mb-3">
-              <label>Diagnosis</label>
-              <textarea
-                className="form-control"
-                value={diagnosis}
-                onChange={(e) => setDiagnosis(e.target.value)}
-              />
-            </div>
+                  {/* Diagnosis */}
+                  <div className="formadmin-group mb-3">
+                    <label>Diagnosis</label>
+                    <textarea
+                      className="form-control"
+                      value={diagnosis}
+                      onChange={(e) => setDiagnosis(e.target.value)}
+                    />
+                  </div>
 
-            {/* Treatment Details */}
-            <div className="formadmin-group mb-3">
-              <label>Treatment Details</label>
-              <textarea
-                className="form-control"
-                value={treatmentDetails}
-                onChange={(e) => setTreatmentDetails(e.target.value)}
-              />
-            </div>
+                  {/* Treatment Details */}
+                  <div className="formadmin-group mb-3">
+                    <label>Treatment Details</label>
+                    <textarea
+                      className="form-control"
+                      value={treatmentDetails}
+                      onChange={(e) => setTreatmentDetails(e.target.value)}
+                    />
+                  </div>
 
-            {/* Reference Links */}
-            <div className="formadmin-group mb-3">
-              <label>Reference Links</label>
-              {referenceLinks.map((link, index) => (
-                <div key={index} className="d-flex mb-2">
-                  <input
-                    type="url"
-                    className="form-control me-2"
-                    value={link}
-                    onChange={(e) =>
-                      handleReferenceLinkChange(index, e.target.value)
-                    }
-                    placeholder="https://example.com"
-                  />
-                  {referenceLinks.length > 1 && (
-                    <Button
-                      variant="danger"
-                      onClick={() => removeReferenceLink(index)}
-                    >
-                      Remove
+                  {/* Reference Links */}
+                  <div className="formadmin-group mb-3">
+                    <label>Reference Links</label>
+                    {referenceLinks.map((link, index) => (
+                      <div key={index} className="d-flex mb-2">
+                        <input
+                          type="url"
+                          className="form-control me-2"
+                          value={link}
+                          onChange={(e) =>
+                            handleReferenceLinkChange(index, e.target.value)
+                          }
+                          placeholder="https://example.com"
+                        />
+                        {referenceLinks.length > 1 && (
+                          <Button
+                            variant="danger"
+                            onClick={() => removeReferenceLink(index)}
+                          >
+                            Remove
+                          </Button>
+                        )}
+                      </div>
+                    ))}
+                    <Button variant="secondary" onClick={addReferenceLink}>
+                      Add Reference Link
                     </Button>
-                  )}
-                </div>
-              ))}
-              <Button variant="secondary" onClick={addReferenceLink}>
-                Add Reference Link
-              </Button>
-            </div>
+                  </div>
 
-            {/* Select Doctors - Searchable Multi-Select */}
-            <div className="formadmin-group mb-3">
-              <label>Select Doctors</label>
-              <Select
-                isMulti
-                name="doctors"
-                options={doctorOptions}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                value={selectedDoctors}
-                onChange={setSelectedDoctors}
-                placeholder="Select Doctors..."
-              />
-            </div>
+                  {/* Select Doctors - Searchable Multi-Select */}
+                  <div className="formadmin-group mb-3">
+                    <label>Select Doctors</label>
+                    <Select
+                      isMulti
+                      name="doctors"
+                      options={doctorOptions}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      value={selectedDoctors}
+                      onChange={setSelectedDoctors}
+                      placeholder="Select Doctors..."
+                    />
+                  </div>
 
-            {/* Select Hospitals - Searchable Multi-Select */}
-            <div className="formadmin-group mb-3">
-              <label>Select Hospitals</label>
-              <Select
-                isMulti
-                name="hospitals"
-                options={hospitalOptions}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                value={selectedHospitals}
-                onChange={setSelectedHospitals}
-                placeholder="Select Hospitals..."
-              />
+                  {/* Select Hospitals - Searchable Multi-Select */}
+                  <div className="formadmin-group mb-3">
+                    <label>Select Hospitals</label>
+                    <Select
+                      isMulti
+                      name="hospitals"
+                      options={hospitalOptions}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      value={selectedHospitals}
+                      onChange={setSelectedHospitals}
+                      placeholder="Select Hospitals..."
+                    />
+                  </div>
+                  {/* Introduction Media */}
+                  <div className="formadmin-group">
+                    <label>Introduction Media</label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      onChange={handleImageChange}
+                      accept="image/*,video/*" // Adjust as needed
+                    />
+                  </div>
+                  {/* Submit and Close Buttons */}
+                  <div className="form-group mb-3 d-flex">
+                    <Button type="submit" variant="primary" className="me-2">
+                      <FontAwesomeIcon icon={faSave} className="me-2" /> Add
+                      Procedure
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      onClick={() => navigate("/admin/procedures")}
+                    >
+                      <FontAwesomeIcon icon={faTimes} className="me-2" /> Close
+                    </Button>
+                  </div>
+                </form>
+              </div>
             </div>
-            {/* Introduction Media */}
-            <div className="formadmin-group">
-              <label>Introduction Media</label>
-              <input
-                type="file"
-                className="form-control"
-                onChange={handleImageChange}
-                accept="image/*,video/*" // Adjust as needed
-              />
-            </div>
-            {/* Submit and Close Buttons */}
-            <div className="form-group mb-3 d-flex">
-              <Button type="submit" variant="primary" className="me-2">
-                <FontAwesomeIcon icon={faSave} className="me-2" /> Add Procedure
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => navigate("/admin/procedures")}
-              >
-                <FontAwesomeIcon icon={faTimes} className="me-2" /> Close
-              </Button>
-            </div>
-          </form>
+          </div>
         </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
