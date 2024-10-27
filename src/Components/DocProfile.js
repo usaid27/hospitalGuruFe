@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+// import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import ContactModal from "./ContactModal";
 import { baseUrl } from "../Constants";
 import doctorImage from "../Assets/doctor.png";
 import axios from "axios";
+import {useLocation, useNavigate } from 'react-router-dom';
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 const DocProfile = (props) => {
   const [Contactmodal, setContactmodal] = useState(false);
   const [docdetails, setdocdetails] = useState({});
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  const { item } = location.state || {}; // Access the passed item
   //   console.log("modal is opened");
 
-  console.log(props.docInfo);
+  // console.log(props.docInfo);
+  console.log(item);
   // const id = 1;
 
   useEffect(() => {
@@ -20,7 +28,8 @@ const DocProfile = (props) => {
   const getDoctorDetials = async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}/api/App/Doctor/${props.docInfo.id}`
+        // `${baseUrl}/api/App/Doctor/${props.docInfo.id}`
+        `${baseUrl}/api/App/Doctor/${item.id}`
       );
       console.log(response);
       setdocdetails(response.data);
@@ -37,29 +46,33 @@ const DocProfile = (props) => {
       : doctorImage;
   };
   return (
+    <div style={{width:"100%", height:"100%"}}>
     <div
       style={{
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw",
+        // width: "100vw",
+        width: "100%",
         height: "100vh",
-        display: "flex",
+        overflowY: "scroll",
+        // display: "flex",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "rgba(0, 0, 0, 0.6)", // dark background overlay
         zIndex: 1050,
       }}
-    >
+      >
+      <Navbar/>
       <div
         className="modal-dialog modal-dialog-centered"
         style={{
-          width: "90%",
-          height: "90%",
+          // width: "90%",
+          // height: "90%",
           //   backgroundColor: "#f8f9fa",
           backgroundColor: "#DDE5F8",
           overflowY: "scroll",
-          borderRadius: "10px",
+          // borderRadius: "10px",
           padding: "10px 20px",
         }}
       >
@@ -79,14 +92,15 @@ const DocProfile = (props) => {
             >
               Doctor Profile
             </h5>
-            <button
+            {/* <button
               type="button"
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
               style={{ outline: "none", border: "none" }}
-              onClick={props.CloseDocProfile}
-            ></button>
+              // onClick={props.CloseDocProfile}
+              onClick={navigate("/doctor")}
+            ></button> */}
           </div>
           <hr />
 
@@ -116,7 +130,8 @@ const DocProfile = (props) => {
                 }}
               >
                 <img
-                  src={convertByteArrayToImage(props.docInfo.image)}
+                  // src={convertByteArrayToImage(item.docInfo.image)}
+                  src={convertByteArrayToImage(item.image)}
                   alt="Doctor"
                   style={{
                     width: "100%",
@@ -369,7 +384,7 @@ const DocProfile = (props) => {
           <hr />
 
           {/* Modal Footer */}
-          <div
+          {/* <div
             className="modal-footer"
             style={{
               display: "flex",
@@ -385,15 +400,18 @@ const DocProfile = (props) => {
             >
               Close
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
+     
       {Contactmodal && (
         <ContactModal
           DocDetails={docdetails}
           ContactModal={handelContactModal}
         />
       )}
+    <Footer/>
+    </div>
     </div>
   );
 };

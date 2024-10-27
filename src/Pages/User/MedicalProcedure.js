@@ -7,8 +7,10 @@ import axios from "axios";
 import { baseUrl } from "../../Constants";
 import Loading from "../Loading";
 import procedureImage from '../../Assets/Procedure.png';
+import { useNavigate } from "react-router-dom";
 
 const MedicalProcedure = () => {
+  const navigate = useNavigate()
   const [medicalModal, setmedicalModal] = useState(false);
   const [loading, setloading] = useState(false);
   const [proceduredata, setproceduredata] = useState({});
@@ -103,9 +105,11 @@ const MedicalProcedure = () => {
     }
   };
 
-  const handelProcedureModal = (item) => {
-    setmedicalModal(true);
-    setproceduredata(item);
+  const handelProcedureModal = (items) => {
+    // setmedicalModal(true);
+    setproceduredata(items);
+    navigate("/ProcedureProfile",{state:{items}})
+
   };
   const closeProcedureModal = () => {
     setmedicalModal(false);
@@ -151,12 +155,12 @@ const MedicalProcedure = () => {
           )}
           </div>
         )}
-        {medicalModal && (
+        {/* {medicalModal && (
           <MedicalProcedureModal
             proceduredata={proceduredata}
             closeProcedureModal={closeProcedureModal}
           />
-        )}
+        )} */}
       </div>
       <Footer />
     </>

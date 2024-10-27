@@ -7,6 +7,9 @@ import ContactModal from "./ContactModal";
 import hospitalImage from "../Assets/hospital-icon.jpg";
 import axios from "axios";
 import { baseUrl } from "../Constants";
+import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -19,6 +22,10 @@ L.Icon.Default.mergeOptions({
 const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
   const [Contactmodal, setContactmodal] = useState(false);
   const [HospitalDetails, setHospitalDetails] = useState({});
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const { item } = location.state || {};
   //   console.log("modal is opened");
   // const id = 1
   const points = [
@@ -48,7 +55,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
   const gethospitaldetails = async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}/api/App/Hospital/${HospitalInfo.id}`
+        `${baseUrl}/api/App/Hospital/${item.id}`
       );
       console.log(response);
       setHospitalDetails(response.data);
@@ -58,6 +65,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
   };
   const handelContactModal = () => {
     setContactmodal(false);
+    navigate("/hospitals")
   };
 
   const convertByteArrayToImage = (base64String) => {
@@ -67,7 +75,25 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
   };
 
   return (
-    <div className="modal-background">
+    <div style={{width:"100%", height:"100%"}}>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        // width: "100vw",
+        width: "100%",
+        height: "100vh",
+        overflowY: "scroll",
+        // display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.6)", // dark background overlay
+        zIndex: 1050,
+      }}
+      >
+    <Navbar/>
+    {/* <div className="modal-background"> */}
       <div className="modal-container">
         {/* Hospital Image */}
         <div className="hospital-img-container">
@@ -76,7 +102,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
             alt={`${HospitalDetails.name}`}
             className="hospital-img"
           />
-          <img
+          {/* <img
             src={require("../Assets/icons8-close-window.gif")}
             alt="closemodalIcon"
             // className="btn-close"
@@ -88,7 +114,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
               height: "5%",
             }}
             onClick={CloseHospitalProfile}
-          />
+          /> */}
           {/* <button
               type="button"
               className="btn-close"
@@ -208,7 +234,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
             alignItems: "center",
           }}
         >
-          <button
+          {/* <button
             type="button"
             className="btn btn-danger"
             data-bs-dismiss="modal"
@@ -216,7 +242,7 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
             onClick={CloseHospitalProfile}
           >
             Close
-          </button>
+          </button> */}
         </div>
       </div>
       {Contactmodal && (
@@ -225,6 +251,9 @@ const HospitalProfileModal = ({ HospitalInfo, CloseHospitalProfile }) => {
           ContactModal={handelContactModal}
         />
       )}
+    {/* </div> */}
+    <Footer/>
+    </div>
     </div>
   );
 };

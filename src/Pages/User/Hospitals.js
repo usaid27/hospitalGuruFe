@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 // import DoctorCard from "../../Components/DoctorCard";
-import profile1 from "../../Assets/hospital-sign.webp";
-import profile2 from "../../Assets/modern-hospital-building (1).webp";
-import profile3 from "../../Assets/modern-hospital-building.webp";
+// import profile1 from "../../Assets/hospital-sign.webp";
+// import profile2 from "../../Assets/modern-hospital-building (1).webp";
+// import profile3 from "../../Assets/modern-hospital-building.webp";
 import hospitalImage from "../../Assets/hospital-icon.jpg";
 // import profile4 from "../../Assets/profile-4.png";
 import "../../Styles/Doctors.css";
@@ -14,8 +14,10 @@ import filterGif from "../../Assets/icons8-filter.gif";
 import axios from "axios";
 import { baseUrl } from "../../Constants";
 import Loading from "../Loading";
+import { useNavigate } from "react-router-dom";
 
 function Hospitals() {
+  const navigate = useNavigate()
   const [HospitalprofileModal, setHospitalprofileModal] = useState(false);
   const [Hospitaldata, setHospitaldata] = useState([]);
   const [HospitalInfo, setHospitalInfo] = useState();
@@ -72,8 +74,9 @@ function Hospitals() {
 
   const openHospitalProfile = (item) => {
     // console.log("open doc profile modal")
-    setHospitalprofileModal(true);
+    // setHospitalprofileModal(true);
     setHospitalInfo(item);
+    navigate("/hospitalsProfile",{state:{item}})
   };
   const CloseHospitalProfile = () => {
     setHospitalprofileModal(false);
@@ -231,12 +234,12 @@ function Hospitals() {
       </div>
       {/* Footer at the bottom */}
       <Footer />
-      {HospitalprofileModal ? (
+      {/* {HospitalprofileModal ? (
         <HospitalProfile
           HospitalInfo={HospitalInfo}
           CloseHospitalProfile={CloseHospitalProfile}
         />
-      ) : null}
+      ) : null} */}
     </>
   );
 }
