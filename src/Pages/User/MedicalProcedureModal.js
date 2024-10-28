@@ -3,12 +3,26 @@ import "../../Styles/ProcedureModal.css"; // Assuming a new CSS file for the mod
 import { baseUrl } from "../../Constants";
 import axios from "axios";
 import procedureImage from "../../Assets/Procedure.png";
+import HospitalProfile from "../../Components/HospitalProfile";
+import DocProfile from "../../Components/DocProfile";
+import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../../Components/Navbar";
+import Footer from "../../Components/Footer";
 
 const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
   // const id = 1;
+  const navigate = useNavigate()
+  const location = useLocation()
   const [ProcedureProfile, setProcedureProfile] = useState({});
+  const [HospitalprofileModal, setHospitalprofileModal] = useState(false);
+  const [HospitalInfo, setHospitalInfo] = useState();
+  const [DocprofileModal, setDocprofileModal] = useState(false);
+  const [docInfo, setdocInfo] = useState();
 
   console.log(proceduredata);
+
+  const { items } = location.state || {};
+
   const dummyDoctors = ["Dr. John Doe", "Dr. Sarah Connor", "Dr. James Smith"];
   const dummyHospitals = [
     "City Hospital",
@@ -20,10 +34,23 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
     getProcedureDetails();
   }, []);
 
+  const openDocProfile = (item) => {
+    // console.log("open doc profile modal")
+    // setDocprofileModal(true);
+    setdocInfo(item);
+    navigate("/doctorProfile",{ state: { item } })
+  };
+  const openHospitalProfile = (item) => {
+    // console.log("open doc profile modal")
+    // setHospitalprofileModal(true);
+    setHospitalInfo(item);
+    navigate("/hospitalsProfile",{state:{item}})
+  };
+
   const getProcedureDetails = async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}/api/App/Procedure/${proceduredata.id}`
+        `${baseUrl}/api/App/Procedure/${items.id}`
       );
       console.log(response);
       setProcedureProfile(response.data);
@@ -31,6 +58,17 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
       console.log(error);
     }
   };
+
+  const CloseHospitalProfile = () => {
+    setHospitalprofileModal(false);
+    // setdocInfo(profile1)
+  };
+
+  const CloseDocProfile = () => {
+    setDocprofileModal(false);
+    // setdocInfo(profile1)
+  };
+
   const convertByteArrayToImage = (base64String) => {
     return base64String
       ? `data:image/jpeg;base64,${base64String}`
@@ -39,14 +77,14 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
 
   return (
     <div className="modal-Procedureoverlay">
+      <Navbar/>
       <div className="modal-Procedurecontainer">
-        <img
-          
+        {/* <img
           src={require("../../Assets/icons8-close-window.gif")}
           alt="close"
           className="close-icon"
           onClick={closeProcedureModal}
-        />
+        /> */}
         <h2
           className="rw-text-title"
           style={{
@@ -79,7 +117,8 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
                 marginBottom: "20px",
                 boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.3s ease",
-                width: "100%", height: "10vh"
+                width: "100%",
+                height: "10vh",
               }}
             />
           </div>
@@ -103,7 +142,11 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
             {
               ProcedureProfile.procedureDoctorMapping?.length > 0
                 ? ProcedureProfile.procedureDoctorMapping.map(
-                    (doctor, index) => <li key={index}>{doctor}</li>
+                    (doctor, index) => (
+                      <li key={index} onClick={openDocProfile(doctor)}>
+                        {doctor}
+                      </li>
+                    )
                   )
                 : null
               // dummyDoctors.map((doctor, index) => (
@@ -120,7 +163,11 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
             {
               ProcedureProfile.procedureHospitalMapping?.length > 0
                 ? ProcedureProfile.procedureHospitalMapping.map(
-                    (hospital, index) => <li key={index}>{hospital}</li>
+                    (hospital, index) => (
+                      <li key={index} onClick={openHospitalProfile(hospital)}>
+                        {hospital}
+                      </li>
+                    )
                   )
                 : null
               // dummyHospitals.map((hospital, index) => (
@@ -130,10 +177,20 @@ const MedicalProcedureModal = ({ proceduredata, closeProcedureModal }) => {
           </ul>
         </div>
 
-        <button className="close-btn" onClick={closeProcedureModal}>
+        {/* <button className="close-btn" onClick={closeProcedureModal}>
           Close
-        </button>
+        </button> */}
       </div>
+      {/* {HospitalprofileModal ? (
+        <HospitalProfile
+          HospitalInfo={HospitalInfo}
+          CloseHospitalProfile={CloseHospitalProfile}
+        />
+      ) : null}
+      {DocprofileModal ? (
+        <DocProfile docInfo={docInfo} CloseDocProfile={CloseDocProfile} />
+      ) : null} */}
+      <Footer/>
     </div>
   );
 };

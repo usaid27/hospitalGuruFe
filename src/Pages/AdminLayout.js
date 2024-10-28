@@ -327,7 +327,7 @@ function AdminLayout() {
         </Toolbar>
         <Divider />
         <List>
-          <ListItem button component={Link} to="/admin/dashboard">
+          <ListItem button component={Link} to="/admin">
             <ListItemIcon>
               <DashboardIcon
                 //   sx={{ color: isDarkMode ? "white" : "black" }}

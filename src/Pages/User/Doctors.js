@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DoctorCard from "../../Components/DoctorCard";
-import profile1 from "../../Assets/profile-1.png";
+// import profile1 from "../../Assets/profile-1.png";
 // import profile2 from "../../Assets/profile-2.png";
 // import profile3 from "../../Assets/profile-3.png";
 // import profile4 from "../../Assets/profile-4.png";
@@ -13,9 +13,11 @@ import filterGif from "../../Assets/icons8-filter.gif";
 import { baseUrl } from "../../Constants";
 import axios from "axios";
 import Loading from "../Loading";
+import { useNavigate } from "react-router-dom";
 
 function Doctors() {
   console.log(baseUrl);
+  const navigate = useNavigate();
   const [docdata, setdocdata] = useState([]);
   const [DocprofileModal, setDocprofileModal] = useState(false);
   const [docInfo, setdocInfo] = useState();
@@ -48,9 +50,11 @@ function Doctors() {
   };
 
   const openDocProfile = (item) => {
+    
     // console.log("open doc profile modal")
-    setDocprofileModal(true);
+    // setDocprofileModal(true);
     setdocInfo(item);
+    navigate("/doctorProfile",{ state: { item } })
   };
   const CloseDocProfile = () => {
     setDocprofileModal(false);
@@ -183,9 +187,9 @@ function Doctors() {
       {/* Adding Footer at the end */}
       <Footer />
 
-      {DocprofileModal ? (
+      {/* {DocprofileModal ? (
         <DocProfile docInfo={docInfo} CloseDocProfile={CloseDocProfile} />
-      ) : null}
+      ) : null} */}
     </>
   );
 }

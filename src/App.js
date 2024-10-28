@@ -31,6 +31,9 @@ import Users from "./Pages/Admin/Users";
 import Registration from "./Pages/Auth/Registration";
 import ForgetPassword from "./Pages/Auth/ForgetPassword";
 import ResetPassword from "./Pages/Auth/ResetPassword";
+import DocProfile from "./Components/DocProfile";
+import HospitalProfile from "./Components/HospitalProfile";
+import MedicalProcedureModal from "./Pages/User/MedicalProcedureModal";
 
 const App = () => {
   // return (
@@ -65,12 +68,24 @@ const App = () => {
       element: <Doctors />,
     },
     {
+      path:"/doctorProfile",
+      element:<DocProfile/>
+    },
+    {
       path: "/hospitals",
       element: <Hospitals />,
     },
     {
+      path:"/hospitalsProfile",
+      element:<HospitalProfile/>
+    },
+    {
       path: "/MedicalProcedure",
       element: <MedicalProcedure />,
+    },
+    {
+      path: "/ProcedureProfile",
+      element: <MedicalProcedureModal/>,
     },
     {
       path: "/reviews",
